@@ -1,6 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from "react";
 import {render} from "@testing-library/react";
-import App from "./App";
+import App from "../App";
 
 describe("App component", ()=>{
     it("should render app with error",()=>{
