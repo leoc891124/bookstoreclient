@@ -1,14 +1,16 @@
 import React from "react";
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
 import { Box } from "@mui/system";
 import styles from "./BookStyle";
+import BookListItem from "./BookListItem";
 
 const propTypes = {
-    books: Proptypes.arrayOf({
-        id: Proptypes.string.isRequired,
-        title: Proptypes.string.isRequired,
-        description: Proptypes.string.isRequired,
-        releaseYear: Proptypes.number.isRequired
+    books: PropTypes.arrayOf({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        releaseYear: PropTypes.number.isRequired
+    
     }).isRequired
 
 }
@@ -16,9 +18,9 @@ const propTypes = {
 const BookList =({books})=>{
     const classes = styles();
     return(
-        <Box className={classes.bookList}>
+        <Box className={classes.bookList} ml={5}>
             {books.map((book)=>(
-                <div key={book.id}>{book.id}</div>
+                <BookListItem book={book} key={book.id} />
             ))}
         </Box>
     )
