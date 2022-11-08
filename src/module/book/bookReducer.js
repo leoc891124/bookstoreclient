@@ -20,7 +20,7 @@ const bookSlice = createSlice({
   reducers: {
     booklist: (state, action) => {
       
-      state.book = action.payload;
+     // state.book = action.payload;
 
       
 

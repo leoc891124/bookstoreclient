@@ -6,19 +6,28 @@ import BookFilter from "./BookFilter";
 import styles from "./BookStyle";
 import { useEffect } from "react";
 import BookList from "./BookList";
+import { Alert, Skeleton, AlertTitle } from "@mui/material";
 
 const BookContainer = () =>{
    
 
 
-    const books = useSelector(getBooks);
     const dispatch = useDispatch();
+    const books = useSelector(getBooks);
+    
+    const bookStatus = useSelector((state) => state.bookredu.status)
+   const error = useSelector((state) => state.bookredu.error)
     
     //console.log(books[0].id);
     
+    console.log(bookStatus);
+        console.log(error);
+
     useEffect(()=>{
        
         dispatch(getBooksApi())
+        
+        
         
         
     },[dispatch]);
@@ -29,7 +38,22 @@ const BookContainer = () =>{
         <Box className={classes.bookContainer}>
             <BookFilter />
             <Box className={classes.bookList}>
-                <BookList books={books}/>
+                {bookStatus === "loading" && (
+                <Box ml={5}>
+                <Skeleton 
+                    variant="rect"
+                    animation="pulse"
+                    width="80%"
+                    height={200}
+
+                />
+            </Box>)}
+            {bookStatus === "failed" && <Alert severity="error"><AlertTitle>Error</AlertTitle>{error} <strong> check it out!</strong></Alert>}
+            
+                 
+         {bookStatus === "succeeded" && <BookList books={books}/>}
+
+                
             </Box>
         </Box>
     );

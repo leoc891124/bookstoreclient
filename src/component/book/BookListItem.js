@@ -23,7 +23,7 @@ const BookListItem = ({book}) =>{
     return (
         <Box mb={2}>
             <Paper className={classes.bookListItemPaper} elevation={2} >
-                <Avatar  sx={{ width: 50, height: 100 }}variant="square">{book.title}</Avatar>
+                <Avatar  sx={{ width: 180, height: 200 }}variant="square">{book.title}</Avatar>
                 <Box ml={1}>
                     <Typography >{book.title}</Typography>
                     <Typography >{book.description}</Typography>
