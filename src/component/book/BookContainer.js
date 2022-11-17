@@ -20,8 +20,8 @@ const BookContainer = () =>{
     
     //console.log(books[0].id);
     
-    console.log(bookStatus);
-        console.log(error);
+    //console.log(bookStatus);
+        //console.log(error);
 
     useEffect(()=>{
        

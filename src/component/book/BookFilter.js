@@ -12,26 +12,10 @@ const BookFilter = ()=>{
     
     const dispatch = useDispatch();
 
-    //const book = useSelector((state) => state.bookredu.book)
-   // const books = useSelector(getBooks);
 
     const [searchText, setSearchText] = useState("");
 
-    /*useEffect(()=>{
-       
-       
-            return dispatch(getBookByTitle(searchText))
-             
-    },[dispatch, searchText]);*/
-    //console.log(searchText)
     
-    /*function findByTitle(e) {
-        e.preventDefault();
-        dispatch(getBookByTitle( searchText));
-        console.log(searchText);
-        //console.log('You clicked submit.');
-      }*/
-
 
     return(
         <Box className={classes.bookFilter}>

@@ -4,7 +4,6 @@ import {getBookService, getBookByTitleService} from "./BookService";
 const initialState = {
   book: [],
   status: "init",
-  filteredUsers: [],
   error: null
 }
 
@@ -41,14 +40,13 @@ const bookSlice = createSlice({
           state.error = action.error.message
         })
         .addCase(getBooksByTitle.fulfilled, (state, action) => {
-          //state.status = 'loading'
-          // Add any fetched posts to the array
+          state.status = 'succeeded'
           state.book = action.payload;
-          /*return {
-            ...state,
-            filteredUsers: action.payload
-          }*/
-        
+       
+        })
+        .addCase(getBooksByTitle.pending, (state, action) => {
+            state.status = 'loading'
+         
         })
         
         
