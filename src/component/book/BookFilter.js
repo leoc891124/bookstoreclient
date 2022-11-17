@@ -21,7 +21,7 @@ const BookFilter = ()=>{
         <Box className={classes.bookFilter}>
             <Paper className={classes.bookFilterPaper}>
                 <Typography>Search book by title</Typography>
-                <Box>
+                <Box paddingTop={3} marginBottom={2}>
                 <TextField
                     placeholder="Enter book title"
                     id="book-search"

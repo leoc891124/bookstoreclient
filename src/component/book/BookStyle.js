@@ -1,4 +1,5 @@
 import { makeStyles, createStyles } from "@mui/styles";
+import { textAlign } from "@mui/system";
 
 export default makeStyles(()=> createStyles({
     bookContainer:{
@@ -13,7 +14,8 @@ export default makeStyles(()=> createStyles({
     },
     bookFilterPaper:{
         width: "100%",
-        height:"100%"
+        height:"100%",
+        textAlign: "center"
     }
     ,
     bookList:{
