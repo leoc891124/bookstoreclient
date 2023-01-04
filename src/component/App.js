@@ -10,7 +10,7 @@ const App = ()=>{
         console.log(books);
     }
         )*/
-    console.log("in App.js");
+    //console.log("in App.js");
     return <Layout>
     <BookContainer/>
 </Layout>

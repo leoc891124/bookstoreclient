@@ -1,8 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import booksReducer from "./bookReducer";
 
-export const bookStore = configureStore({
-  reducer: {
-    bookredu: booksReducer
-  },
-});
+const rootReducer = combineReducers({
+  bookredu: booksReducer
+})
+
+export const setupStore = preloadedState => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState
+  })
+}

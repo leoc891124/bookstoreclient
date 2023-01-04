@@ -22,9 +22,10 @@ export const getBooksByTitle = createAsyncThunk('books/getBooksTitle', async (ti
 
 const bookSlice = createSlice({
   name: 'bookredu',
-  initialState,
+  initialState : initialState,
   reducers: {
-    },
+    
+  },
     extraReducers(builder) {
       builder
         .addCase(getBooksApi.pending, (state, action) => {
@@ -47,6 +48,9 @@ const bookSlice = createSlice({
         .addCase(getBooksByTitle.pending, (state, action) => {
             state.status = 'loading'
          
+        })
+        .addDefaultCase((state, action) => {
+          state.status = "init"
         })
         
         
