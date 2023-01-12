@@ -7,16 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {  getBooksByTitle, getBooks  } from "../../module/book/bookReducer";
 
 
-const propTypes = {
+/*const propTypes = {
     books: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        //id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         releaseYear: PropTypes.number.isRequired
     
     }).isRequired
 
-}
+}*/
 
 
 const BookListItem = ({book}) =>{
@@ -34,8 +34,8 @@ const BookListItem = ({book}) =>{
        
         <Box mb={2}>
             <Paper className={classes.bookListItemPaper} elevation={2} >
-                <Avatar  sx={{ width: 180, height: 200 }}variant="square">{book.title}</Avatar>
-                <Box ml={1}>
+                <Avatar sx={{ width: 180, height: 200 }}variant="square">{book.title}</Avatar>
+                <Box ml={1} >{book.id}
                     <Typography >{book.title}</Typography>
                     <Typography >{book.description}</Typography>
                     <Typography >{book.releaseYear}</Typography>
@@ -47,5 +47,5 @@ const BookListItem = ({book}) =>{
 
 }
 
-BookListItem.propTypes = propTypes;
+//BookListItem.propTypes = propTypes;
 export default BookListItem;

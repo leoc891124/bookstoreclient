@@ -5,6 +5,7 @@
  import { render } from '@testing-library/react';
  import '@testing-library/jest-dom/extend-expect';
  import BookListItem from '../BookListItem';
+ import { renderWithProviders } from "../../../util/testUtil";
 
 
  describe('BookListItem', () => {
@@ -22,7 +23,9 @@
                 expect(getByText("desc")).toBeInTheDocument();
                 expect(getByText("2019")).toBeInTheDocument();
 
- })
+      })
+
+
 
 })
  

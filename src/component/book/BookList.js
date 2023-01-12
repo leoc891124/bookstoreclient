@@ -5,7 +5,7 @@ import styles from "./BookStyle";
 import BookListItem from "./BookListItem";
 import { Alert, AlertTitle } from "@mui/material";
 
-const propTypes = {
+/*const propTypes = {
     books: PropTypes.arrayOf({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
@@ -14,7 +14,7 @@ const propTypes = {
     
     }).isRequired
 
-}
+}*/
 
 const BookList =({books})=>{
     const classes = styles();
@@ -28,5 +28,5 @@ const BookList =({books})=>{
 
 }
 
-BookList.propTypes = propTypes;
+//BookList.propTypes = propTypes;
 export default BookList;

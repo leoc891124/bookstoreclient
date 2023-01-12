@@ -21,6 +21,7 @@ exports[`BookContainer should render BookContainer with error 1`] = `
         >
           <div
             class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+            data-testid="book-title-input"
           >
             <label
               class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
@@ -58,6 +59,7 @@ exports[`BookContainer should render BookContainer with error 1`] = `
         </div>
         <button
           class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+          data-testid="book-search-button"
           tabindex="0"
           type="button"
         >
@@ -76,6 +78,7 @@ exports[`BookContainer should render BookContainer with error 1`] = `
       >
         <span
           class="MuiSkeleton-root MuiSkeleton-rect MuiSkeleton-pulse css-58ftfq-MuiSkeleton-root"
+          data-testid="book-loading"
           style="width: 80%; height: 200px;"
         />
       </div>

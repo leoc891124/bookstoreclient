@@ -45,10 +45,12 @@ const BookContainer = () =>{
                     animation="pulse"
                     width="80%"
                     height={200}
+                    data-testid="book-loading"
 
                 />
             </Box>)}
-            {bookStatus === "failed" && <Alert severity="error"><AlertTitle>Error</AlertTitle>{error} <strong> check it out!</strong></Alert>}
+            
+            {bookStatus === "failed" && <Alert severity="error"><AlertTitle data-testid="book-error-message">Error</AlertTitle>{error} <strong> check it out!</strong></Alert>}
             
                  
          {bookStatus === "succeeded" && <BookList books={books}/>}

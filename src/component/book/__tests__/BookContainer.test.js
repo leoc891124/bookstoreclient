@@ -5,7 +5,7 @@ import React from "react";
 import { renderWithProviders } from "../../../util/testUtil";
 import BookContainer  from "../BookContainer";
 import BookList from "../BookList";
-//import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { getBooksApi } from "../../../module/book/bookReducer";
 import reducer, {
     initialState,
@@ -24,17 +24,7 @@ describe("BookContainer",()=>{
 
     it("should render without error",() =>{
 
-        
-    
-        /*const book = {
-            
-                id: 1, 
-                title: 'Test title', 
-                description: "test description", 
-                releaseYear: 2019, 
-            
-          }*/
-        
+      
           const action = { type: getBooksApi.fulfilled,  
             
             payload: [{
@@ -49,10 +39,6 @@ describe("BookContainer",()=>{
 
         const state = reducer(initialState, action);
 
-    /*getBooksApi.mockImplementation(()=>({
-        type: getBooksApi.fulfilled.type,
-        payload: book
-    }))*/
         renderWithProviders(<BookContainer/>,{});
         expect(state).toEqual( {book : [{
             id: 1, 
@@ -70,6 +56,27 @@ describe("BookContainer",()=>{
 
         expect(asFragment()).toMatchSnapshot();
     })
+
+
+    it("should be pending BookContainer",()=>{
+        const { getByTestId } = renderWithProviders(<BookContainer />,{});
+             
+        expect(getByTestId("book-loading")).toBeInTheDocument();
+        
+    })
+
+    it("should be faild BookContainer",()=>{
+        
+        const action = { type: getBooksApi.rejected, error: "undefined"};
+        const state = reducer(initialState, action);
+       
+        renderWithProviders(<BookContainer />,{});
+        expect(state).toEqual( { book:[], status: "failed", error: undefined })
+            
+        
+    })
+   
+
 
 });
 
