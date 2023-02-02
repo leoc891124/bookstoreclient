@@ -35,7 +35,7 @@ const BookListItem = ({book}) =>{
         <Box mb={2}>
             <Paper className={classes.bookListItemPaper} elevation={2} >
                 <Avatar sx={{ width: 180, height: 200 }}variant="square">{book.title}</Avatar>
-                <Box ml={1} >{book.id}
+                <Box ml={1} >
                     <Typography >{book.title}</Typography>
                     <Typography >{book.description}</Typography>
                     <Typography >{book.releaseYear}</Typography>
