@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import booksReducer from "./bookReducer";
-import loginRedu from "../user/user-toolkit";
+import booksReducer from "./book/bookReducer";
+import loginReducer from "./user/userReduer";
 
 const rootReducer = combineReducers({
   bookredu: booksReducer,
-  userredu: loginRedu
+  userredu: loginReducer
 })
 
 export const setupStore = preloadedState => {
@@ -13,3 +13,4 @@ export const setupStore = preloadedState => {
     preloadedState
   })
 }
+

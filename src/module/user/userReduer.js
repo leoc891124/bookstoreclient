@@ -1,39 +1,66 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {login} from "./UserService";
+import {loginService, registerService} from "./UserService";
+
+
 
 const initialState = {
-  token: "",
+  user: null,
+  token: localStorage.getItem('bookstore-token'),
   status: "init",
   error: null
 }
 
-export const loginApi = createAsyncThunk('login/postLogin', async (username, password) => {
-  const response = await login(username, password);
-  return response.data
+
+
+export const loginApi = createAsyncThunk('login/loginIn', async (payload) => {
+  
+  const response = await loginService(payload);
+  localStorage.setItem('bookstore-token', response.data.token);
+  console.log(response);
+  return response.data;
+
   
 })
 
+export const registerApi = createAsyncThunk('login/register', async (payload) => {
+  
+  const response = await registerService(payload);
+  //localStorage.setItem('bookstore-token', response.data.token);
+  console.log(response);
+  return response.data;
+
+  
+})
 
 
 const userSlice = createSlice({
   name: 'userredu',
   initialState : initialState,
-  reducers: {
-
-
-    
-  },
+  reducers: {  },
     extraReducers(builder) {
       builder
-        .addCase(login.pending, (state, action) => {
+        .addCase(loginApi.pending, (state, action) => {
           state.status = 'loading'
         })
-        .addCase(login.fulfilled, (state, action) => {
+        .addCase(loginApi.fulfilled, (state, action) => {
           state.status = 'succeeded'
           // Add any fetched posts to the array
           state.token = action.payload
+          
         })
-        .addCase(login.rejected, (state, action) => {
+        .addCase(loginApi.rejected, (state, action) => {
+          state.status = 'failed'
+          state.error = action.error.message
+        })
+        .addCase(registerApi.pending, (state, action) => {
+          state.status = 'loading'
+        })
+        .addCase(registerApi.fulfilled, (state, action) => {
+          state.status = 'succeeded'
+          state.user.push(action.payload);
+                    
+        })
+        .addCase(registerApi.rejected, (state, action) => {
           state.status = 'failed'
           state.error = action.error.message
         })
@@ -47,6 +74,8 @@ const userSlice = createSlice({
 export const {  } = userSlice.actions;
 
 
-export const loginIn = (state) => state.userredu.token
+export const loginIn = (state) => state.userredu
+
+//export const loginIn = (state) => state.userredu
 
 export default userSlice.reducer;

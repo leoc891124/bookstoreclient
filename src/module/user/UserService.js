@@ -1,12 +1,10 @@
 import axios from "axios";
+//import { apiCall } from "react-fetch-wrapper";
 import baseurl from "../../config";
 
 
-export const login =(username, password) => axios.post(`${baseurl}/api/v1/login/`,{
-    username,
-    password
-});
 
+export const loginService =(payload) =>  axios.post(`${baseurl}/api/v1/login`, payload   ) ;
 
+export const registerService =(payload) =>  axios.post(`${baseurl}/api/v1/register`, payload   ) ;
 
-//export default getBookService;

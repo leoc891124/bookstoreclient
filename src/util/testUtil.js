@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 //import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
-import { setupStore } from "../module/book/book-toolkit";
+import { setupStore } from "../module/store";
 //import bookReducer from "../module/book/bookReducer";
+import {SnackbarProvider} from "notistack"
 
 
 export function renderWithProviders(
@@ -18,5 +19,5 @@ export function renderWithProviders(
   function Wrapper({ children }) {
     return <Provider store={store}>{children}</Provider>
   }
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+  return { store, ...render(<SnackbarProvider maxSnack={1}>{ui}</SnackbarProvider>, { wrapper: Wrapper, ...renderOptions }) }
 }

@@ -60,21 +60,7 @@ const bookSlice = createSlice({
 
 export const {  } = bookSlice.actions;
 
-/*export const getBookAsync = () => async(dispatch) => {
-  try{
-    const books = await getBookService();
-    dispatch( booklist(books.data))
-    console.log(books.data);
-} catch(error){
-    console.log(error);
-}
-}*/
 
 export const getBooks = (state) => state.bookredu.book
-
-/*export const getBookByTitle = (state, bookTitle) => {
-  return state.bookredu.book.find((boo) => boo.title  === bookTitle)
-  
-}*/
 
 export default bookSlice.reducer;
