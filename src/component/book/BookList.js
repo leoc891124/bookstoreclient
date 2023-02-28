@@ -21,7 +21,7 @@ const BookList =({books})=>{
     //console.log(books.length);
     return(
         <Box className={classes.bookList} ml={5}>
-       { books.length > 0 ? books.map((book)=>( <BookListItem book={book} key={book.id} />)) :
+       { books.length > 0 ? books.map((book)=>( <BookListItem book={book} key={book.id}/>)) :
         <Alert severity="info"><AlertTitle>Error</AlertTitle><strong> No records found with that book title</strong></Alert> }
        </Box>
     )

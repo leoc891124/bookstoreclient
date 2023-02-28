@@ -32,7 +32,7 @@ const BookListItem = ({book}) =>{
               
         //<div>{bookListSearch()}</div>
        
-        <Box mb={2}>
+        <Box mb={2} key={book.id}>
             <Paper className={classes.bookListItemPaper} elevation={2} >
                 <Avatar sx={{ width: 180, height: 200 }}variant="square">{book.title}</Avatar>
                 <Box ml={1} >

@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {loginService, registerService} from "./UserService";
-
+import { useNavigate } from "react-router-dom";
 
 
 const initialState = {
-  user: null,
-  token: localStorage.getItem('bookstore-token'),
+  token: null,
   status: "init",
   error: null
 }
@@ -13,9 +12,12 @@ const initialState = {
 
 
 export const loginApi = createAsyncThunk('login/loginIn', async (payload) => {
-  
+ 
   const response = await loginService(payload);
   localStorage.setItem('bookstore-token', response.data.token);
+
+  
+
   console.log(response);
   return response.data;
 
@@ -25,7 +27,6 @@ export const loginApi = createAsyncThunk('login/loginIn', async (payload) => {
 export const registerApi = createAsyncThunk('login/register', async (payload) => {
   
   const response = await registerService(payload);
-  //localStorage.setItem('bookstore-token', response.data.token);
   console.log(response);
   return response.data;
 
@@ -33,10 +34,20 @@ export const registerApi = createAsyncThunk('login/register', async (payload) =>
 })
 
 
+
 const userSlice = createSlice({
   name: 'userredu',
   initialState : initialState,
-  reducers: {  },
+  reducers: { 
+    logout: (state, action) => {
+      console.log("in reducer logout")
+      localStorage.removeItem("bookstore-token");
+      state.token = null
+      state.status = "init"
+
+      
+    }
+   },
     extraReducers(builder) {
       builder
         .addCase(loginApi.pending, (state, action) => {
@@ -44,34 +55,36 @@ const userSlice = createSlice({
         })
         .addCase(loginApi.fulfilled, (state, action) => {
           state.status = 'succeeded'
-          // Add any fetched posts to the array
-          state.token = action.payload
+         
+          state.token = action.payload.token
           
+      
         })
         .addCase(loginApi.rejected, (state, action) => {
           state.status = 'failed'
           state.error = action.error.message
+
         })
         .addCase(registerApi.pending, (state, action) => {
           state.status = 'loading'
         })
         .addCase(registerApi.fulfilled, (state, action) => {
-          state.status = 'succeeded'
-          state.user.push(action.payload);
+          state.status = 'successreg'
+          //state.user.push(action.payload);
                     
         })
         .addCase(registerApi.rejected, (state, action) => {
           state.status = 'failed'
           state.error = action.error.message
         })
-        
+       
         
         
     },
   
   })
 
-export const {  } = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 
 export const loginIn = (state) => state.userredu

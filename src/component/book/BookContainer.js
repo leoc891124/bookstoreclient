@@ -53,7 +53,7 @@ const BookContainer = () =>{
             {bookStatus === "failed" && <Alert severity="error"><AlertTitle data-testid="book-error-message">Error</AlertTitle>{error} <strong> check it out!</strong></Alert>}
             
                  
-         {bookStatus === "succeeded" && <BookList books={books}/>}
+         {bookStatus === "succeeded" && <BookList books={books} key={books.id}/>}
 
                 
             </Box>

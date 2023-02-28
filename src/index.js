@@ -4,8 +4,7 @@ import App from "./component/App";
 import {Provider} from "react-redux";
 import {setupStore } from "./module/store";
 import axios from "axios";
-import {  useSelector } from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -17,9 +16,12 @@ const store = setupStore()
 axios.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('bookstore-token');
-        if(token != null){
+        
+        //const decoded = jwt_decode(token.substring(7));
+        //console.log(decoded.exp) && decoded.exp > Date.now();
+        if(token != null ){
             config.headers.Authorization = token;
-        }
+        } 
         //console.log(token +" index");
         return config;
     },

@@ -1,14 +1,16 @@
-import { Button, Paper, TextField, Typography } from "@mui/material";
+import { Button, Link, Paper, TextField, Typography } from "@mui/material";
 import { Box , spacing} from "@mui/system";
 import React, { useEffect } from "react";
 import styles from "./LoginStyle";
 import * as Yup from "yup";
 import {useFormik}  from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import {loginApi, loginIn} from "../../module/user/userReduer"
+import {loginApi, logout} from "../../module/user/userReduer"
 //import {loginService }from "../../module/user/UserService";
 import { useSnackbar} from "notistack";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import moment from 'moment';
 
 
 const validateSchema = Yup.object({
@@ -29,6 +31,7 @@ const Login = () =>{
     const UseNave = useNavigate();
     
     const token = useSelector((state) => state.userredu.token);
+    //const token = localStorage.getItem('bookstore-token');
     
    const loginStatus = useSelector((state) => state.userredu.status);
    const error = useSelector((state) => state.userredu.error);
@@ -41,13 +44,42 @@ const Login = () =>{
             variant: "error"
         })
         
-    } else if (loginStatus === "succeeded"){
+    } else if (loginStatus === "succeeded" && !(token==null)){
         enqueueSnackbar("Login Success!",{
             variant: "success"
         })
         UseNave({ pathname: '/' })
+
+       //expired token
+
+
+       const decoded = jwt_decode(token.substring(7));
+       //console.log(decoded + "Decoded");
+       const startDate = moment(decoded.exp);
+       const timeEnd = moment(decoded.iat);
+       const diff = startDate.diff(timeEnd);
+       const diffDuration = moment.duration(diff);
+       //console.log(diffDuration.asMilliseconds()*1000);
+       //expireToken(diffDuration.asMilliseconds()*1000)
+
+       setTimeout(() =>{
+        //console.log("in timmer")
+        enqueueSnackbar("token expired, please login again!",{
+            variant: "error"
+        })
+        dispatch(logout());
+        UseNave({ pathname: '/login' })
+    
+    
+      }, diffDuration.asMilliseconds()*1000)
+
+       //
+
+
+
+
     }
-   },[loginStatus, enqueueSnackbar])
+   },[loginStatus, enqueueSnackbar, dispatch, token, UseNave])
 
     const formik = useFormik({
         initialValues:{
@@ -70,6 +102,10 @@ const Login = () =>{
             
         }
     })
+
+    const handleRegister = (e) => {
+        UseNave({ pathname: '/register' })
+}
 
     return (
         <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
@@ -114,6 +150,8 @@ const Login = () =>{
                         variant="contained" 
                         disabled={loginStatus === 'loading' ? true : false}
                     >Login</Button>
+                    <br />
+                     <Link component="button" variant="body2" onClick={handleRegister}>Register</Link>
                 </Paper>
             </Box>
 
