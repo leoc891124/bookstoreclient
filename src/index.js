@@ -4,7 +4,7 @@ import App from "./component/App";
 import {Provider} from "react-redux";
 import {setupStore } from "./module/store";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 
 
 

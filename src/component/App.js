@@ -5,7 +5,7 @@ import BookContainer from "./book/BookContainer";
 import Login from "./user/Login";
 import {SnackbarProvider} from "notistack"
 //import Auth from "./Auth";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import Register from "./user/Register";
 import PrivateRoute from "../PrivateRoute";
 //import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import PrivateRoute from "../PrivateRoute";
 const App = ()=>{
     //const UseNave = useNavigate();
     
-    const token = useSelector((state) => state.userredu.token);
+    //const token = useSelector((state) => state.userredu.token);
 
     return (
         <SnackbarProvider maxSnack={1} autoHideDuration={1000}>

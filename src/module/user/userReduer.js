@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {loginService, registerService} from "./UserService";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 
 const initialState = {
@@ -15,6 +15,7 @@ export const loginApi = createAsyncThunk('login/loginIn', async (payload) => {
  
   const response = await loginService(payload);
   localStorage.setItem('bookstore-token', response.data.token);
+  //console.log()
 
   
 
@@ -57,6 +58,8 @@ const userSlice = createSlice({
           state.status = 'succeeded'
          
           state.token = action.payload.token
+
+          state.error = null;
           
       
         })

@@ -1,5 +1,5 @@
 import { Button, Link, Paper, TextField, Typography } from "@mui/material";
-import { Box , spacing} from "@mui/system";
+import { Box } from "@mui/system";
 import React, { useEffect } from "react";
 import styles from "./LoginStyle";
 import * as Yup from "yup";
@@ -44,22 +44,31 @@ const Login = () =>{
     //console.log(loginStatus);
     
     if(loginStatus === "failed"){
-        enqueueSnackbar("Username and password wrong!",{
-            variant: "error"
-        })
+        if(error === "Request failed with status code 401") {
+            enqueueSnackbar("Username and password wrong!",{
+                variant: "error"
+            })
+        } else {
+            enqueueSnackbar(error,{
+                variant: "error"
+            })
+        }
+        
         
     } else if(loginStatus === "succeeded" ){
         console.log("in success");
         enqueueSnackbar("Login Success!",{
             variant: "success"
         })
+
+        
         UseNave({ pathname: '/dashboard' });
 
        //expired token
 
-       console.log(loginStatus + " test1");
+       //console.log(loginStatus + " test1");
        const decoded = jwt_decode(token.substring(7));
-       console.log(decoded + "Decoded");
+       //console.log(decoded + "Decoded");
        const startDate = moment(decoded.exp);
        const timeEnd = moment(decoded.iat);
        const diff = startDate.diff(timeEnd);
@@ -81,12 +90,8 @@ const Login = () =>{
 
     }
 
-
-    
-
-
-
-   },[loginStatus, enqueueSnackbar, dispatch, token, UseNave])
+   
+   },[loginStatus, enqueueSnackbar, dispatch, token, UseNave, error])
 
     const formik = useFormik({
         initialValues:{
@@ -99,7 +104,7 @@ const Login = () =>{
             const username = values.username;
             const password = values.password;
             //loginService(values.username, values.password);
-            console.log(loginStatus.pending);
+            //console.log(loginStatus.pending);
                      
           dispatch(loginApi({username, password}));
           //  console.log(token + "login compoment");
