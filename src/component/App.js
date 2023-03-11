@@ -7,6 +7,7 @@ import {SnackbarProvider} from "notistack"
 //import Auth from "./Auth";
 import { useSelector } from "react-redux";
 import Register from "./user/Register";
+import PrivateRoute from "../PrivateRoute";
 //import { useNavigate } from "react-router-dom";
 //import {BrowserRouter} from "react-router-dom";
 
@@ -16,12 +17,13 @@ const App = ()=>{
     const token = useSelector((state) => state.userredu.token);
 
     return (
-        <SnackbarProvider maxSnack={1} autoHideDuration={2000}>
+        <SnackbarProvider maxSnack={1} autoHideDuration={1000}>
         <Router>
             <Layout>
                 <Routes>
                     <Route path="/login" element={<Login />}></Route>
-                    <Route exact path="/" element={token ? <BookContainer />: <Navigate to='/login'/> }></Route>
+                    <Route exact path="/" element={<Navigate replace to="/login" />} />
+                    <Route path="/dashboard" element={<PrivateRoute> <BookContainer /></PrivateRoute> }></Route>
                     <Route path="/register" element={<Register />}></Route>
                 </Routes>
             </Layout>

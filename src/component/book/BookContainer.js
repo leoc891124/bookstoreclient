@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import BookList from "./BookList";
 import { Alert, Skeleton, AlertTitle } from "@mui/material";
 
+
 const BookContainer = () =>{
    
 
@@ -17,6 +18,7 @@ const BookContainer = () =>{
     
     const bookStatus = useSelector((state) => state.bookredu.status)
    const error = useSelector((state) => state.bookredu.error)
+   
     
     //console.log(books[0].id);
     
@@ -35,6 +37,8 @@ const BookContainer = () =>{
     const classes = styles();
     return(
 
+        
+        
         <Box className={classes.bookContainer}>
             <BookFilter />
             <Box className={classes.bookList}>
@@ -50,6 +54,8 @@ const BookContainer = () =>{
                 />
             </Box>)}
             
+           
+
             {bookStatus === "failed" && <Alert severity="error"><AlertTitle data-testid="book-error-message">Error</AlertTitle>{error} <strong> check it out!</strong></Alert>}
             
                  

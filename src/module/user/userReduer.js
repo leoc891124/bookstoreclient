@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const initialState = {
-  token: null,
+  token: localStorage.getItem('bookstore-token') || null,
   status: "init",
   error: null
 }

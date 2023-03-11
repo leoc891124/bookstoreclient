@@ -11,6 +11,8 @@ import { useSnackbar} from "notistack";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import moment from 'moment';
+import CircularProgress from '@mui/material/CircularProgress';
+import { Navigate} from "react-router-dom";
 
 
 const validateSchema = Yup.object({
@@ -39,22 +41,25 @@ const Login = () =>{
 
 
    useEffect(()=>{
+    //console.log(loginStatus);
+    
     if(loginStatus === "failed"){
         enqueueSnackbar("Username and password wrong!",{
             variant: "error"
         })
         
-    } else if (loginStatus === "succeeded" && !(token==null)){
+    } else if(loginStatus === "succeeded" ){
+        console.log("in success");
         enqueueSnackbar("Login Success!",{
             variant: "success"
         })
-        UseNave({ pathname: '/' })
+        UseNave({ pathname: '/dashboard' });
 
        //expired token
 
-
+       console.log(loginStatus + " test1");
        const decoded = jwt_decode(token.substring(7));
-       //console.log(decoded + "Decoded");
+       console.log(decoded + "Decoded");
        const startDate = moment(decoded.exp);
        const timeEnd = moment(decoded.iat);
        const diff = startDate.diff(timeEnd);
@@ -73,12 +78,14 @@ const Login = () =>{
     
       }, diffDuration.asMilliseconds()*1000)
 
-       //
-
-
-
 
     }
+
+
+    
+
+
+
    },[loginStatus, enqueueSnackbar, dispatch, token, UseNave])
 
     const formik = useFormik({
@@ -108,9 +115,20 @@ const Login = () =>{
 }
 
     return (
-        <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
+       <div>
+       {
+        token ? <Navigate to='/dashboard'/> : (
+
+            <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Box className={classes.wrapper}>
                 <Paper className={classes.paper}>
+                {loginStatus === "loading" && 
+        
+                        <Box sx={{ display: 'flex' , justifyContent: "center"}}>
+                        <CircularProgress />
+                    </Box>
+     
+                }
                     <Typography variant="h4">Book Store Login</Typography>
                     <TextField
                        className={classes.fields}
@@ -153,9 +171,17 @@ const Login = () =>{
                     <br />
                      <Link component="button" variant="body2" onClick={handleRegister}>Register</Link>
                 </Paper>
+
+               
+
             </Box>
 
         </form>
+
+        )
+       }
+       </div>
+       
     )
     
 }
